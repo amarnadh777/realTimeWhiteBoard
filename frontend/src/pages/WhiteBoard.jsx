@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Stage, Layer, Line, Rect } from 'react-konva';
 import socket from '../../socket/socket';
 import toast from 'react-hot-toast';
+import Toolbar from '../components/Toolbar';
+import Topbar from '../components/Topbar';
 const WhiteBoard = () => {
     const [tool, setTool] = useState("rect");
     const [shapes, setShapes] = useState([]);
@@ -40,9 +42,13 @@ const WhiteBoard = () => {
 
     }, []);
     return (
-        <div className='w-screen h-screen bg-gray-400'>
+        <div className='w-screen h-screen bg-white'>
 
-            <Stage width={window.innerWidth} height={window.innerHeight}
+
+          <Topbar  roomId={1212} name={"sdfdsf"}/>
+            <Toolbar/>
+
+            {/* <Stage width={window.innerWidth} height={window.innerHeight}
             
             onMouseDown={handleMouseDown}
             >
@@ -57,7 +63,7 @@ const WhiteBoard = () => {
             strokeWidth={1}
           />
                 </Layer>
-            </Stage>
+            </Stage> */}
 
 
             
