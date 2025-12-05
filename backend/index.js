@@ -14,7 +14,7 @@ const io = new Server (server, {
 });
 
 
-io.on('connection',(socket)=>{
+io.on('connection',(socket)=>{  
     console.log(`User connected: ${socket.id}`);
 
 
@@ -27,6 +27,18 @@ const {roomId,name}=data;
     console.log(`User ${name} joined room: ${roomId}`);
     socket.join(roomId);
     socket.to(roomId).emit("user_joined", { name });
+
+
+   })
+
+   socket.on("draw_rect",(data)=>{
+
+    console.log("draw rect data",data);
+
+    const {roomId,x,y,width,height}=data;
+
+    socket.to(roomId).emit("draw_rect", {x,y,width,height});
+
 
 
    })
