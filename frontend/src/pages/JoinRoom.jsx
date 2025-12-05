@@ -54,6 +54,11 @@ localStorage.setItem("name", name);
     socket.emit("join_room", { name, roomId });
 
     console.log(`Joined Room: ${roomId}`);
+
+
+localStorage.setItem("name", name);
+  localStorage.setItem("roomId", roomId);
+     navigate(`/whiteboard/2323`)
   };
 
   return (

@@ -8,6 +8,9 @@ const WhiteBoard = () => {
     const [tool, setTool] = useState("rect");
     const [shapes, setShapes] = useState([]);
 
+    const roomId = localStorage.getItem("roomId");
+    const name = localStorage.getItem("name");  
+
 
     const handleMouseDown = (e) => {
         console.log("mouse down");
@@ -19,6 +22,18 @@ const WhiteBoard = () => {
     y: pos.y,
     width: 0,
     height: 0,
+        })
+
+        socket.emit("draw_rect", {
+
+                x: pos.x,
+    y: pos.y,
+    width: 0,
+    height: 0,
+    roomId: roomId
+
+
+
         })
 
     }
@@ -35,6 +50,12 @@ const WhiteBoard = () => {
 
      });
 
+     socket.on("draw_rect", (data) => {
+        console.log("Drawing data received:", data);
+
+        setShapes(data); // Update shapes with received data
+     });
+
 
    return () => {
     socket.off("user_joined");
@@ -45,12 +66,14 @@ const WhiteBoard = () => {
         <div className='w-screen h-screen bg-white'>
 
 
-          <Topbar  roomId={1212} name={"sdfdsf"}/>
+          <Topbar  roomId={roomId} name={name   }/>
             <Toolbar/>
 
-            {/* <Stage width={window.innerWidth} height={window.innerHeight}
+            <Stage width={window.innerWidth} height={window.innerHeight}
             
             onMouseDown={handleMouseDown}
+
+  
             >
                 <Layer>
                   <Rect
@@ -63,7 +86,7 @@ const WhiteBoard = () => {
             strokeWidth={1}
           />
                 </Layer>
-            </Stage> */}
+            </Stage>
 
 
             
